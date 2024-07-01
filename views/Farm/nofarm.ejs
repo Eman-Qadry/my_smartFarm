@@ -1,0 +1,82 @@
+<%-include('../includes/head.ejs')%>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+ flex-direction: column;
+min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+  margin: 0;
+}
+.main-content {
+    flex: 1; /* Grow to fill available space */
+  }
+    .shad{
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        margin: auto;
+        width: 50%;
+      }
+      .farmss p {
+        font-size: 18px;
+        font-family: "Inter";
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(11, 10, 10, 0.1);
+      }
+    .content-box {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .btn-signup {
+        margin-top: 20px;
+        background-color: #3C7D5A;
+        border-radius: 50px;
+         width:40%;
+    }
+    .btn-signup:hover{
+        background-color: #63ae86;
+      }
+      
+.farmss {
+    height: 100vh;
+    max-height: 100vh;
+    background-color: #ebe8e8;
+   
+
+  }
+</style>
+
+</head>
+
+<body >
+    <div class="container-fluid farmss  d-flex flex-column main-content ">
+        <%-include('../includes/nav.ejs')%>
+  
+        <div class="shad">
+            <div class="content-box bg-white">
+                <p>
+                   Hello Framer ,Welcome to you in our website .
+                  it seems you do not have a farm ,click on add farm button to add new one
+                </p>
+
+                <a href="farm/add-farm">
+                    <button class="btn btn-primary btn-signup " >add farm</button>
+                </a>
+            </div>
+    </div>
+</div>
+   
+    <%-include('../includes/footer.ejs')%>
+    <script src="/js/all.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+

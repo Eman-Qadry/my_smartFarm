@@ -1,0 +1,126 @@
+.myfarm {
+    background-color: #ebe8e8;
+    margin: auto;
+    max-height: 100%;
+    height: auto;
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    padding-top: 35px;
+    justify-content: space-between;
+    background-color: #fff;
+    text-align: center;
+    min-height: 80vh; 
+    height: auto;
+  }
+  .sidebar a{
+    text-decoration: none;
+  }
+  .btn-farm,
+  .btn-add-farm {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    border: 1px solid #3C7D5A;
+    border-radius: 30px;
+    font-size: 24px; 
+    height: 75px;
+  }
+  .btn-add-farm{
+    background-color: #3C7D5A;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .farms-sidebar h2 {
+    text-align: center;
+    font-family: "Delius Swash Caps";
+    font-size: 40px;
+    color: #3C7D5A;
+    font-weight: 400;
+  }
+  
+  .farm-number {
+    display: flex;
+    font-family: "Delius Swash Caps", cursive;
+    font-size: 64px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center;
+  }
+  
+  .product-body {
+    background-color: #BBC6C0;
+    border-radius: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  
+  .product-body h5 {
+    font-family: "Delius";
+    font-size: 20px;
+    padding-top: 12px;
+  }
+  
+  .product-body img {
+    width: 100%;
+    height: 100%;
+    max-height: 230px; 
+    object-fit: cover; 
+    border-radius: 20px 20px 0px 0px;
+  }
+  
+  .circular-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #a4a4a44d;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .circular-icon .fa-plus {
+    color: #3C7D5A;
+    font-size: 40px;
+  }
+  .farm-content{
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: #fffafa;
+    border-radius: 20px;
+  }
+  .myfarm  .farm-content .row{
+    padding-top: 20px;
+    margin: auto;
+    width: 95%;
+  }
+  
+  
+  .btn-add-farm:hover{
+   background-color:#63ae86; 
+  }
+  .myfarm-empty .farm-content{
+    background-image: url('Untitled\ design.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    max-height: 100vh;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    width: 90%;
+  }
+  .myfarm-empty .farm-content .message{
+    width: 60%;
+  }
+  
+  .myfarm-empty h1{
+    margin-bottom: 20%;
+  }
+  .myfarm-empty h2{
+    margin-bottom: 5%;
+  }

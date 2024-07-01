@@ -1,0 +1,79 @@
+<%-include('../includes/head.ejs')%>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+    margin: 0;
+  }
+  
+  .main-content {
+    flex: 1; /* Grow to fill available space */
+    background-color: #ebe8e8;
+  }
+    .shad{
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        margin: auto;
+        width: 50%;
+      }
+      .main-content p {
+        font-size: 18px;
+        font-family: "Inter";
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(11, 10, 10, 0.1);
+      }
+    .content-box {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .btn-signup {
+        margin-top: 20px;
+        background-color: #3C7D5A;
+        border-radius: 50px;
+         width:40%;
+    }
+    .btn-signup:hover{
+        background-color: #63ae86;
+      }
+      
+.farmss {
+  
+    background-color: #ebe8e8;
+   
+
+  }
+</style>
+
+</head>
+
+<body >
+  <%-include('../includes/nav.ejs')%>
+    <div class="container-fluid main-content  d-flex flex-column ">
+      
+    
+        <div class="shad">
+            <div class="content-box bg-white">
+                <p>
+                 <%=irrigation%>
+                </p>
+               
+            </div>
+    </div>
+
+    </div>
+    <%-include('../includes/footer.ejs')%>
+    <script src="/js/all.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+

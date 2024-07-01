@@ -1,0 +1,103 @@
+<%-include('../includes/head.ejs')%>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(360deg, rgb(245, 255, 245) 0%,#ebe8e8 100%);
+         
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 100px 0 20px 0;
+           
+        }
+        .heading {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .attribut img{
+            border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            margin-left: 50%;
+            margin-top:2%
+        }
+        .attribute {
+            
+            background-color: white;
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+       
+        margin-top: 10px;
+        }
+        .attribute h3 {
+          color: #33d1cc;
+            text-align: center;
+            
+        }
+        .attribute p {
+            margin: 5px 0;
+            text-align: center;
+        }
+        /* Additional styles for formatted text */
+        .formatted-text {
+            white-space: pre-line; /* Preserves newlines in the text */
+            font-family: Courier, monospace; /* Uses monospace font for better text alignment */
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <%-include('../includes/nav.ejs')%>
+    <div class="container">
+      
+        <div class="attribut" style=" display:flex;">
+           
+            <h1 style="margin-top:8%; margin-left:4%; font-size:50px"><%= crop.name %></h1>
+            <img src="<%=crop.image %>" alt="cucumber">
+        </div>
+        <div class="attribute">
+            <h3>Description</h3>
+            <div class="formatted-text"><%= crop.description %></div>
+        </div>
+        <div class="attribute">
+            <h3>Climate</h3>
+            <div class="formatted-text" id="formattedText3"></div>
+        </div>
+        <div class="attribute">
+            <h3>Soil</h3>
+            <div class="formatted-text" id="formattedText4"></div>
+        </div>
+        <div class="attribute">
+            <h3>Seasons</h3>
+            <div class="formatted-text" id="formattedText"></div>
+        </div>
+        <div class="attribute">
+            <h3>Irrigation</h3>
+            <div class="formatted-text" id="formattedText2"></div>
+        </div>
+    </div>
+    <%-include('../includes/footer.ejs')%>
+    <script>
+        console.log(`<%=crop%>`);
+        const formattedText =` <%= crop.variate %>`;
+
+        document.getElementById('formattedText').textContent = formattedText;
+        const formattedText2 =` <%= crop.irrigation %>`;
+
+        document.getElementById('formattedText2').textContent = formattedText2;
+        const formattedText3 =` <%= crop.climate %>`;
+
+        document.getElementById('formattedText3').textContent = formattedText3;
+        const formattedText4 =` <%= crop.soil %>`;
+
+        document.getElementById('formattedText4').textContent = formattedText4;
+    </script>
+</body>
+</html>

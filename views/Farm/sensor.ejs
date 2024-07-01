@@ -1,0 +1,185 @@
+<%-include('../includes/head.ejs')%>
+
+<script src="/socket.io/socket.io.js"></script> <!-- Include Socket.IO client library -->
+<style>
+  body {
+    background-color: #ebe8e8;
+    color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    height: 100vh;
+   
+  }
+  .sensor-info {
+    display: grid;
+    grid-template-areas: "left right";
+    max-width: 900px;
+    height: 600px;
+    padding: 65px 0 30px 0;
+    margin:auto
+  }
+  .sensor-info .left-container {
+    background: #e0d8d7;
+    overflow: hidden;
+    position: flex;
+    height: 560px;
+    width: 600px;
+  }
+  .left-container h1 {
+    color: rgba(0, 0, 0, 0.8);
+   margin-left: 50px;
+    font-size: 24px;
+  }
+  .left-container a i {
+  
+  
+    color: #807182;
+   
+    margin-right: 5px;
+    padding: 10px;
+    
+  }
+  .sensor-info .right-container {
+    background: #e0d8d7;
+    display: grid;
+    grid-template-areas: "." ".";
+    width: 300px;
+    height: 560px;
+  }
+  .sensor-info .sensor-reading {
+    background-color:  #cdc5ce;
+    padding: 20px;
+    width: 100%;
+    max-width: 490px;   
+    height: 350px;
+    border-radius: 20px;
+    margin-top: 70px;
+    margin-left: 20px;
+  }
+  .sensor-info img {
+    margin-top: 4rem;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+   
+  }
+  svg.progress-circle {
+    width: 230px;
+    height: 230px;
+    margin-top: 10%;
+  }
+  .status-column {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  button {
+    border: none;
+    outline: 0;
+    padding: 10px;
+    margin: 15rem 2rem 3rem 2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #807182;
+    text-align: center;
+    cursor: pointer;
+    width: 15rem;
+    border-radius: 4px;
+  }
+  .gradient-text {
+    background: linear-gradient(#3C7D5A, #56C289);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  #crop-name {
+    font-size: 60px;
+  }
+  .goBack {
+    font-size: 35px;
+    color: #000;
+  }
+  .goBack:hover {
+    color: #3C7D5A;
+  }
+  @media (max-width: 768px) {
+    .sensor-info {
+      width: 90%;
+    }
+    #crop-name {
+      font-size: 56px;
+    }
+    #type {
+      font-size: 26px;
+    }
+    #status {
+      font-size: 36px;
+    }
+    .sensor-info img {
+      width: 150px;
+      height: 150px;
+    }
+    svg.progress-circle {
+      width: 150px;
+      height: 150px;
+    }
+  }
+</style>
+</head>
+<body>
+<%-include('../includes/nav.ejs')%>
+<div class="sensor-info">
+  <div class="left-container">
+    <a href="#" onclick="goBack()" style="text-decoration: none;" class="goBack"><i class="fas fa-chevron-left"></i></a>
+    <h1 id="crop-name"><%= crop.name %></h1>
+    <div class="sensor-reading ">
+        <h2 style="text-align: center;">Sensor Reading</h2>
+        <svg viewBox="0 0 100 100" class="progress-circle"style="margin-left:20%;">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#e0d8d7" stroke-width="10"></circle>
+          <g transform="rotate(270.64 50 50)">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#807182" stroke-width="10" stroke-dasharray="258" id="progress-circle-<%= crop._id %>"></circle>
+          </g>
+          <text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-size="20" fill="#000000" id="moisture-<%= crop._id %>">0%</text>
+        </svg>
+      </div>
+   
+  </div>
+  <div class="right-container">
+    <img src="<%= crop.image ? '/' + crop.image : '/imgs/cropicon.jpg' %>" alt="Crop Image" class="crop-image">
+    <a href="/plant/irrigation/<%=crop.name%>" style="text-decoration:none; "><button>Irrigation info</button></a>
+    
+   
+  </div>
+</div>
+<%-include('../includes/footer.ejs')%>
+<script>
+  const cropId = `<%= crop._id %>`;
+  const socket = io({ query: { cropId } });
+
+  socket.on('sensorData', data => {
+    const { cropId, sensorData } = data;
+    console.log(sensorData);
+    const moistureElement = document.getElementById(`moisture-${cropId}`);
+    const progressCircle = document.getElementById(`progress-circle-${cropId}`);
+
+    const moistureValue = sensorData.soilMoisture.toFixed(2);
+    moistureElement.textContent = `${moistureValue}%`;
+
+    // Assuming 100% moisture corresponds to 0 offset (full circle)
+    const maxDashArray = 258;
+    const dashOffset = maxDashArray - (moistureValue / 100 * maxDashArray);
+
+    progressCircle.style.strokeDashoffset = dashOffset;
+  });
+
+  function goBack() {
+    window.history.back();
+  }
+</script>
+</body>
+</html>

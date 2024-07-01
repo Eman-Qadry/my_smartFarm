@@ -1,0 +1,51 @@
+
+<header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/imgs/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+      SMART FARM
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/home' ? 'active' : '' %>" aria-current="page" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/plant' ? 'active' : '' %>" href="/plant">Crops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/about' ? 'active' : '' %>" href="/about">About us</a>
+          </li>
+          <% if (isAuth) { %>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/detect' ? 'active' : '' %>" href="/detect">Detect</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/farm' ? 'active' : '' %>" href="/farm">My Farm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/profile' ? 'active' : '' %>" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item " style="margin-left: 10%;">
+            <a class="nav-link <%= path === '/logout' ? 'active' : '' %>" href="/logout">logout</a>
+          </li>
+         
+        <% } else { %>
+          <li class="nav-item" style="margin-left: 30%;">
+            <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
+          </li>
+        <% } %>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>

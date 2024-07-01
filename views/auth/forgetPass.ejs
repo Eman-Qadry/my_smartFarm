@@ -1,0 +1,47 @@
+<%-include('../includes/head.ejs')%>
+</head>
+
+<body class="login-page">
+
+    <div class="container-fluid forget-pass">
+        <% if (errorMessage){ %>
+            <div class="user-message user-message--error"> <%=errorMessage%></div>
+            <%
+           } %>
+        <div class="row">
+
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="imgs/login.png" alt="Login Image" class="img-fluid" style="height: 700px;">
+            </div>
+
+            <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="form-container">
+                    <form id="forgetPass-form" action="reset" method ="POST">
+                        <h1 class="font-weight-bold">Forgot password </h1>
+                        <p>Don't worry enter your <br> registered email id  to receive password reset link </p>
+                        <div class="inputField">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text input-group-addon"><i class="fas fa-envelope"></i>
+                                        </span>
+                                    </div>
+                                    <input type="email" class="form-control"name="email" id="email" placeholder="Email address"
+                                        required>
+                                       
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-send">Reset Password</button>
+                            <p class="switch-form">Remember password?<a href="/login" id="switch-to-login" class="font-weight-bold">Login</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<%-include('../includes/head.ejs')%>
+
+</head>
+<style>
+    .image-container {
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .image-container:hover .edit-message {
+        display: block;
+    }
+    
+    .crop-image {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+    
+    .edit-message {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: none;
+        text-align: center;
+    }
+    
+    
+</style>
+<body>
+    <%-include('../includes/nav.ejs')%>
+    <div class="container-fluid profile" >
+        <div class="profil">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar">
+                        <div class="col-md-3">
+                            <div class="image-container">
+                                <img src="<%= user.image ? user.image : '/imgs/icon.jpg' %>" alt="crop-image" class="crop-image" id="sidebarImage">
+
+                                <label for="sidebarFileInput" class="edit-message">Edit Image</label>
+                                <input type="file" id="sidebarFileInput"name="file" class="form-control d-none" accept="image/*">
+                                <!-- Hidden form for sidebar image upload -->
+                                <form id="uploadSidebarImageForm" action="/uploadprofile" method="POST" enctype="multipart/form-data" class="d-none">
+                                    <input type="file" name="file" id="sidebarFileInputHidden" class="d-none" accept="image/*">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="links">
+                            
+                            <div class="link">
+                                <a href="#" onclick="editprofile()" style="text-decoration: none;"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+                            </div>
+                            <div class="link">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <i class="fa-regular fa-bell"></i> Notifications
+                                    </div>
+                                    <div class="col">
+                                        <i class="col fa-solid fa-toggle-on" style="width: 60px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="link">
+                                <div class="row">
+                                    <div class="col-sm-8 icon">
+                                        <i class="fa-solid fa-globe"></i> Language
+                                    </div>
+                                    <div class="col language">
+                                        English
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="links logout">
+                            <div class="link">
+                                <a href="/logout" style="text-decoration: none;"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 edit-profile " style="padding: 100px 0 20px 0;">
+                    <form class="profile-form" action="edit-profile" method="POST">
+                        <div class="enable-edit">
+                            <i class="fa-solid fa-pen"></i> Edit Profile
+                        </div>
+                        <div class="row form-content">
+                            <div class="col-md-6 input-field">
+                                <label for="first-name">First Name</label><br>
+                                <input type="text" id="first-name" name="name" class="first-name" value="<%=user.name%>">
+                            </div>
+                            <div class="col-md-6 input-field">
+                                <label for="last-name">Last Name</label><br>
+                                <input type="text" id="last-name" name="lastname" class="last-name">
+                            </div>
+                            <div class="col-12 input-field">
+                                <label for="email">Email</label><br>
+                                <input type="email" id="email" name="newemail" class="email" value="<%=user.email%>">
+                            </div>
+                            <div class="col-12 input-field">
+                                <label for="address">Address</label><br>
+                                <input type="text" id="address" name="address" class="address">
+                            </div>
+                            <div class="col-12 input-field">
+                                <label for="password">Password</label><br>
+                                <input type="password" id="password" name="password" class="password">
+                            </div>
+                            <input type="hidden" id="email2" name="email" class="email" value="<%=user.email%>">
+                            <button type="submit" class="col-4 btn-save">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+                
+                      
+                       
+                    </div>
+                </div>
+            </div>
+      
+            <%-include('../includes/footer.ejs')%>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function editprofile() {
+            document.querySelector('.edit-profile').classList.remove('d-none');
+            document.querySelector('.general-details').classList.add('d-none');
+        }
+
+        function generaldetails() {
+            document.querySelector('.edit-profile').classList.add('d-none');
+            document.querySelector('.general-details').classList.remove('d-none');
+        }
+
+        document.getElementById('sidebarImage').addEventListener('mouseover', function() {
+            document.querySelector('.edit-message').style.display = 'block';
+        });
+
+        document.getElementById('sidebarImage').addEventListener('mouseout', function() {
+            document.querySelector('.edit-message').style.display = 'none';
+        });
+
+        document.getElementById('sidebarImage').addEventListener('click', function () {
+            document.getElementById('sidebarFileInput').click();
+        });
+
+        document.getElementById('sidebarFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+
+                reader.onload = function (e) {
+                    const imageDataUrl = e.target.result;
+                    document.getElementById('sidebarImage').src = imageDataUrl;
+                    document.getElementById('sidebarFileInputHidden').files = event.target.files;
+                    document.getElementById('uploadSidebarImageForm').submit();
+                }
+            }
+        });
+    </script>
+      
+
+    <script src="/js/all.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+                               
+                          
+ 
+        
+

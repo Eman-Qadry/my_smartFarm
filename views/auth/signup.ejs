@@ -1,0 +1,92 @@
+<%-include('../includes/head.ejs')%>
+</head>
+
+<body class="signup-page">
+
+    <div class="container-fluid register">
+        <% if (errorMessage){ %>
+            <div class="user-message user-message--error"> <%=errorMessage%></div>
+            <%
+           } %>
+        <div class="row">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="imgs/login.png" alt="Login Image" class="img-fluid" style="height: 700px;">
+            </div>
+
+            <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="form-container">
+                    <form id="Sign up-form" action="signup" method="POST">
+                        <h1 class="font-weight-bold">Sign up</h1>
+                        <div class="inputField">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text input-group-addon"><i class="fas fa-user"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" id="username" placeholder="User name" name="name"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text input-group-addon"><i
+                                                    class="fas fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                        <input type="email" class="form-control" id="email" placeholder="Email address" name="email"
+                                            required>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text input-group-addon"><i
+                                                    class="fas fa-lock"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Password" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text input-group-addon"><i
+                                                    class="fas fa-lock"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" id="confirmpassword"
+                                            name="confirmpassword" placeholder="Confirm password" required>
+                                    </div>
+                                </div>
+                               
+                                     
+
+                            </div>
+
+                            <button type="submit" class="btn-signup">Sign up</button>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="agreeTerms">
+                                <label class="form-check-label" for="agreeTerms">I agree to the terms of services and
+                                    privacy policy </label>
+                            </div>
+                            <p class="switch-form">Already have an account!<a href="/login"
+                                    id="switch-to-login">Login</a></p>
+                            <div class="footer">
+                                <a href="#"> <img src="imgs/google.png" alt="google-icon" class="fa-google"></a>
+                                <a href="#"><img src="imgs/twitter (1).png" alt="twitter-icon"></a>
+                                <a href="#"><img src="imgs/facebook.png" alt="facebook-icon"></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

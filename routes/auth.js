@@ -1,0 +1,15 @@
+const express=require('express');
+const authrouter= express.Router();
+const authcontroller=require('../controllers/auth');
+authrouter.get('/login',authcontroller.getlogin);
+authrouter.post('/login',authcontroller.postlogin);
+authrouter.get('/signup',authcontroller.getsignup);
+authrouter.post('/signup',authcontroller.postsignup);
+authrouter.get('/logout',authcontroller.postlogout);
+authrouter.get('/reset',authcontroller.getReset);
+authrouter.post('/reset',authcontroller.postReset);
+authrouter.get('/reset/:token',authcontroller.getNewPass);
+authrouter.get('/new-pass',authcontroller.newpass);
+authrouter.post('/reset/:token',authcontroller.postNewPass);
+authrouter.get('/confirmed',authcontroller.getconfirmed);
+module.exports=authrouter;

@@ -1,0 +1,263 @@
+<%-include('../includes/head.ejs')%>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+         flex-direction: column;
+        min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+          margin: 0;
+        }
+        .main-content {
+            flex: 1; /* Grow to fill available space */
+          }
+        /* Header */
+        header {
+            background-color: white;
+            color: rgb(0, 0, 0);
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #40b736;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            background-color: #40b736;
+            border-radius: 4px;
+            color: white;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 100px 0 20px 0;
+            text-align: center;
+
+        }
+
+        .team h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .team-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            width :70%;
+            margin:auto;
+        }
+
+        .card {
+            background-color: #f0f7f4c5;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 18rem;
+            height: 25rem;
+            margin-top: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-img {
+            width: 18rem;
+            height: 12rem;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        .card-info button {
+            margin: 1rem 2rem;
+          
+            background-color: #3C7D5A;
+            border-radius: 50px;
+             width:40%;
+               
+        }
+              
+        .card-info button:hover {
+            background-color: #63ae86;;
+              }
+        
+
+        .card-name {
+            font-size: 2rem;
+            margin: 10px 0;
+            color:#3C7D5A
+        }
+
+        .card-role {
+            font-size: 1rem;
+            color: #888;
+            margin: 5px 0;
+        }
+
+        .card-email {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .add-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 18rem;
+            height: 25rem;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .add-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .add-icon {
+            font-size: 10rem;
+            color: #40b736;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: block;
+            }
+
+            .logo {
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+                justify-content: space-between;
+            }
+
+            .nav-links li {
+                margin-right: 0;
+            }
+
+            .about h1 {
+                font-size: 2rem;
+            }
+
+            .about p {
+                font-size: 0.9rem;
+            }
+
+            .about-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-img {
+                width: 50%;
+                height: 50%;
+                margin-bottom: 1rem;
+            }
+
+            .about-info p {
+                margin: 1rem 1rem;
+            }
+
+            .about-info button {
+                margin: 1rem 2rem;
+                width: 10rem;
+            }
+
+            .team {
+                margin: 0 1rem;
+            }
+            .team  a{
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <%-include('../includes/nav.ejs')%>
+    <div class="main-content" >
+    <section class="team">
+        <div class="team-cards">
+            <% user.farm.forEach(function(farm) { %>
+                <a href="/farm/<%=farm._id %>" style=" text-decoration: none;">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="<%= farm.image ? farm.image : '/imgs/farmicon.jpg' %>" alt="Farm Image">
+
+                        </div>
+                        <div class="card-info" style=" text-decoration: none; ">
+                            <h2 class="card-name" style=" text-decoration: none;"><%=farm.name%></h2>
+                            <p class="card-role" style=" text-decoration: none;">Size:<%=farm.size%> m</p>
+                            <p class="card-role" style=" text-decoration: none;">Location:<%=farm.location%></p>
+                            <p class="card-role" style=" text-decoration: none;"><%=farm.soiltype%> Soil</p>
+                            <a href="/farm/delete/<%=farm._id %>" style=" text-decoration: none;">
+                                <button class="button">Delete</button>
+                            </a>
+                        </div>
+                    </div>
+                </a>
+            <% }); %>
+            <a href="/farm/add-farm" style=" text-decoration: none;">
+                <div class="add-card">
+                    <div class="add-icon">+</div>
+                </div>
+            </a>
+        </div>
+    </section>
+</div>
+    <%-include('../includes/footer.ejs')%>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<%-include('../includes/head.ejs')%>
+</head>
+
+<body class="login-page">
+
+    <div class="container-fluid set-pass">
+        <% if (errorMessage){ %>
+            <div class="user-message user-message--error"> <%=errorMessage%></div>
+            <%
+           } %>
+     
+        <div class="row">
+
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <img src="/imgs/login.png" alt="Login Image" class="img-fluid" style="height: 770px;">
+            </div>
+
+            <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
+                <div class="form-container">
+                    <form id="forgetPass-form" action="/reset/<%=token%>" method ="post">
+                        <h1 class="font-weight-bold">Set new password</h1>
+                        <div class="inputField">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text input-group-addon"><i
+                                                class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text input-group-addon"><i
+                                                class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" id="confirmpassword"
+                                        name="confirmpassword" placeholder="Confirm password" required>
+                                </div>
+                            </div>
+                          
+                            <input type="hidden" name="userId"  value="<%= user_id  %>">
+                            <input type="hidden" name="token"  value="<%= token  %>">
+                            <button type="submit" class="btn-send">Reset password</button>
+                           
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

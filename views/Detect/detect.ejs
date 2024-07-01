@@ -1,0 +1,64 @@
+
+    <%-include('../includes/head.ejs')%>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <%-include('../includes/nav.ejs')%>
+    <div class="container-fluid detect flex-grow-1 d-flex flex-column justify-content-between" style="   padding: 100px 0 20px 0;" >
+     
+        <div class="container-fluid flex-grow-1 d-flex">
+            <div class="row w-100">
+                <div class="col-md-6 d-flex">
+                    <img src="imgs/detect.jfif" alt="detect-img" class="img-fluid" style="max-height: 83vh;">
+                </div>
+                <div class="col-md-6 d-flex flex-column">
+                    <h3>Plant Diseases <br> Detection</h3>
+                    <div class="d-flex flex-column detection">
+                        <h4>Check plant leaf health by photo</h4>
+                        <form id="uploadForm" action="/analyze-plant" method="POST" enctype="multipart/form-data">
+                           
+                            <div class="detection">
+                                <div class="input-group-form">
+                                    <input type="file" id="fileInput" class="form-control" name="file" accept="image/*">
+                                  
+                                    <div id="imageContainer"></div>
+                                    <label for="fileInput" class="file-label">Choose image</label>
+                                </div>
+                             
+                                <button type="submit" class="btn-analysis" style="display: none;">Analysis</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-include('../includes/footer.ejs')%>
+    <script>
+        function handleFileInputChange(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+
+                reader.onload = function (e) {
+                    const imageDataUrl = e.target.result;
+                    const imageElement = document.createElement('img');
+                    imageElement.src = imageDataUrl;
+                    imageElement.style.width = '100%';
+                    imageElement.style.height = '100%';
+                    imageElement.style.objectFit = 'cover';
+                    document.getElementById('imageContainer').innerHTML = '';
+                    document.getElementById('imageContainer').appendChild(imageElement);
+
+                    document.querySelector('.file-label').style.display = 'none';
+                    document.querySelector('.btn-analysis').style.display = 'block';
+                };
+            }
+        }
+
+        document.getElementById('fileInput').addEventListener('change', handleFileInputChange);
+    </script>
+    <script src="js/all.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

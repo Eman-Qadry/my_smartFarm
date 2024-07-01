@@ -1,0 +1,61 @@
+:root{
+    --darkcolor:#19283f;
+    --greencolor:#33d1cc;
+
+}
+
+
+.navbar{
+    background-color:var(--darkcolor);
+}
+
+.navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus{
+    color: var(--greencolor);
+}
+   header {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  color: #3C7D5A;
+  font-size: 36px;
+  float: left;
+}
+
+ul {
+  margin-right: 2%;
+  float: right;
+  width: 48%;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  width: 90%;
+  margin: auto;
+}
+
+ul a {
+
+  color: black;
+}
+
+ul a,
+.logo {
+  text-decoration: none;
+}
+
+ul a:hover,
+.logo:hover {
+
+  color: #3C7D5A;
+}

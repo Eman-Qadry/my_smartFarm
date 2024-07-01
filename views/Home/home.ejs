@@ -1,0 +1,586 @@
+<%-include('../includes/head.ejs')%>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+  body{
+    background: linear-gradient(360deg, rgb(245, 255, 245) 0%,#ebe8e8 100%);
+  }
+.home {
+  background-color: #ebe8e8;
+  padding-bottom: 20px;
+  
+}
+#search-input {
+ width: 250px;
+  display: inline;}
+  
+
+.main {
+  width: 90%;
+  margin: auto;
+  padding: 100px 0 20px 0;
+}
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+.soil-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute cards evenly */
+  width: 80%; /* Increase width to accommodate more cards */
+  margin: auto;
+}
+
+.soil-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin: 10px; /* Add margin for spacing between cards */
+  padding: 20px;
+  width: calc(50% - 40px); /* Adjust width to fit 2 cards in a row, accounting for margin */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.soil-card h2 {
+  margin-top: 0;
+  color: #555;
+}
+.soil-card p {
+  margin: 5px 0;
+}
+.properties {
+  margin: 10px 0 0 20px;
+}
+.properties p {
+  margin: 3px 0;
+}
+.main h1 {
+  color: #58A85B;
+  font-size: 64px;
+  font-family: "Inter";
+  margin-top: 35px;
+}
+
+.main .analysis .row {
+  margin-top: 65px;
+  text-align: center;
+}
+
+.main .analysis img {
+  width: 80%;
+  height: auto;
+  background-color: #ebe8e8;
+}
+
+.main .analysis h2 {
+  margin-top: 20px;
+  font-size: 45px;
+  margin-bottom: 65px;
+}
+
+.widget {
+  width: 96%;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.day {
+  margin-left: 5%;
+  font-size: 64px;
+  color: #58A85B;
+  font-family: "Inter";
+}
+
+.temperature {
+  margin-left: 5%;
+  font-size: 128px;
+  color: #58A85B;
+  font-family: "Inter";
+  margin-top: 45px;
+}
+
+#weather-icon {
+  width: 50%;
+  margin-left: 45%;
+}
+
+.air-quality,
+.temp-tomorrow {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  height: 60%;
+}
+.progress-bar-gradient {
+  
+  background: linear-gradient(to right, green, yellow, orange, red);
+}
+
+.air-quality h5,
+.temp-tomorrow h5 {
+  font-size: 24px;
+  font-family: "Inter";
+}
+
+.air-quality h6,
+.temp-tomorrow h6 {
+  font-size: 20px;
+  color: #515050;
+}
+
+.max-min {
+  margin-left: 5%;
+  color: #58A85B;
+  font-size: 20px;
+  font-family: "Inter";
+  padding-top: 12px;
+}
+
+.bottom span {
+  font-family: "Delius";
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.forecast h4 {
+  font-size: 32px;
+  margin-top: 50px;
+}
+
+.forecast .container-fluid {
+  display: flex;
+  flex-wrap: wrap;
+ 
+  justify-content: space-between;
+}
+
+.hourly-forecast
+ {
+  background-color: #fff;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  text-align: center;
+  width: calc(15% - 20px);
+}
+.daily-forecast {
+  background-color: #fff;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  width: calc(15% - 20px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+}
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+.scroll-container .hourly-forecast {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  text-align: center;
+}
+.hourly-forecast img {
+  width: 50px;
+  height: 50px;
+}
+@media (max-width: 1200px) {
+  .hourly-forecast,
+  .daily-forecast {
+    width: calc(20% - 40px);
+  }
+}
+
+@media (max-width: 992px) {
+  .hourly-forecast,
+  .daily-forecast {
+    width: calc(25% - 40px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hourly-forecast,
+  .daily-forecast {
+    width: calc(33% - 40px);
+  }
+
+  .main h1 {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  .temperature {
+    font-size: 64px;
+    text-align: center;
+  }
+
+  .widdget,
+  .air-quality,
+  .temp-tomorrow {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .hourly-forecast,
+  .daily-forecast {
+    width: calc(50% - 40px);
+  }
+
+  .main h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .temperature {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  .widdget,
+  .air-quality,
+  .temp-tomorrow {
+    width: 100%;
+    margin: auto;
+  }
+ 
+  .chart-container {
+    width: 80%;
+    margin: auto;
+  }
+  
+}
+</style>
+<body>
+    <div class="container-fluid home">
+      <%-include('../includes/nav.ejs')%>
+        <div class="main">
+            <div class="weather">
+
+               
+                <div class="weather-input mt-3 mx-5 mb-4">
+                    <input type="text" id="search-input" placeholder="Enter city name" class="form-control">
+                    <button onclick="fetchWeatherData()" class="btn btn-outline-success">Search</button>
+                </div>
+                <div class="widget">
+                    <div class="row mx-3 w-100">
+                        <div class="col">
+                            <h2 class="day" id="day">Loading...</h2>
+                            <h2 class="temperature" id="temperature">Loading...</h2>
+                            <h5 class="max-min" id="max-min">Loading...</h5>
+                        </div>
+                        <div class="col ml-3">
+                            <img id="weather-icon" class="weather-icon" alt="Weather Icon">
+                        </div>
+                    </div>
+                    <div class="row mx-3 mt-5 bottom">
+                        <span class="col rain" id="rain">Loading...</span>
+                        <span class="col wind" id="wind">Loading...</span>
+                        <span class="col direction" id="direction">Loading...</span>
+                        <span class="col Arrow" id="pressure">Loading...</span>
+                        <span class="col feelLike" id="feels-like">Loading...</span>
+                        <span class="col Visibility" id="visibility">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="forecast">
+                    <h4>Weather Forecast Throughout the Day</h4>
+                    <div class="scroll-container" id="hourly-forecasts">
+                        <!-- Hourly forecast data will be added here dynamically -->
+                    </div>
+                </div>
+
+                <div class="forecast">
+                    <h4>5 days forecast</h4>
+                    <div class="container-fluid" id="daily-forecasts">
+                        <!-- Daily forecast data will be added here dynamically -->
+                    </div>
+                </div>
+                <div class="row w-80 mt-5 justify-content-between">
+                    <div class="col-md-6 text-center air-quality">
+                        <h5>Air Quality: <h6 id="air-quality-value">Loading...</h6>
+                        </h5>
+                        <div class="container">
+                            <div class="progress" style="height: 15px;">
+                                <div class="progress-bar progress-bar-gradient" role="progressbar" style="width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 mx-3 text-center temp-tomorrow">
+                        <h5>Humidity <h6 id="today-humidity">Loading...</h6>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+           
+           
+            <div class="forecast">
+              <h4>Summer crops</h4>
+              <div class="scroll-container" id="hourly">
+                <%  summerCrops.forEach(function(crop) { %>
+                  <div class="hourly-forecast">
+                 <h5 class="days"> <%=crop.name%></h5>
+                </div>
+                 <% }); %>
+              </div>
+              </div>
+               
+            <div class="forecast">
+              <h4>Winter crops</h4>
+              <div class="scroll-container" id="hourly">
+                <%   winterCrops.forEach(function(crop) { %>
+                  <div class="hourly-forecast">
+                 <h5 class="days"> <%=crop.name%></h5>
+                </div>
+                 <% }); %>
+                </div>
+          </div>
+
+          <div class="forecast">
+            <h4>Autumn crops</h4>
+            <div class="scroll-container" id="hourly">
+              <%   Autumncrops.forEach(function(crop) { %>
+                <div class="hourly-forecast">
+               <h5 class="days"> <%=crop.name%></h5>
+              </div>
+               <% }); %>
+              </div>
+        </div>
+          </div>
+    <h1>Soil Types</h1>
+    <div class="soil-container">
+      <% soilTypes.forEach(function(soil) { %>
+        <div class="soil-card">
+          <h2 style="text-align:center"> <%= soil.type %></h2>
+          <p><strong> <%= soil.description %> </strong></p>
+          <div class="properties">
+            <p style="color:#a24919; font-size:20px;"><strong>Properties:</strong></p>
+            <p>Drainage: <%= soil.properties.drainage %></p>
+            <p>Fertility: <%= soil.properties.fertility %></p>
+            <p>Water Retention: <%= soil.properties.waterRetention %></p>
+            <p>Common Uses: <%= soil.properties.commonUses %></p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</div>
+    <%-include('../includes/footer.ejs')%>
+    <script>
+        function fetchWeatherData() {
+            const apiKey = '192483f1bba2ac95917ccdb8b4cef706';
+            const searchInput = document.getElementById('search-input');
+            let city = searchInput.value.trim();
+
+            if (city === '') {
+                // Attempt to get current location
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+
+                            // Fetch city name based on current coordinates
+                            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    city = data.name;
+                                    fetchWeatherDataByCity(city, apiKey);
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching city name:', error);
+                                    alert('Failed to fetch current location. Please enter a city name manually.');
+                                });
+                        },
+                        error => {
+                            console.error('Error getting location:', error);
+                            alert('Failed to fetch current location. Please enter a city name manually.');
+                        }
+                    );
+                } else {
+                    alert('Geolocation is not supported by this browser. Please enter a city name manually.');
+                }
+            } else {
+                fetchWeatherDataByCity(city, apiKey);
+            }
+        }
+
+        // Function to fetch weather data by city name
+        function fetchWeatherDataByCity(city, apiKey) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    updateWeatherUI(data);
+                    fetchAirQuality(city);
+                    displayTomorrowTemperature(data.list);
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    alert('Failed to fetch weather data. Please try again later.');
+                });
+        }
+
+        function updateWeatherUI(data) {
+            const currentWeather = data.list[0];
+            document.getElementById('day').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            document.getElementById('temperature').innerText = `${Math.round(currentWeather.main.temp)}°C`;
+            document.getElementById('max-min').innerText = `Max.${Math.round(currentWeather.main.temp_max)}°C, Min.${Math.round(currentWeather.main.temp_min)}°C`;
+            document.getElementById('rain').innerText = `Rain: ${currentWeather.rain ? (currentWeather.rain['3h'] || currentWeather.rain['1h'] || 0) : 0} mm`;
+            document.getElementById('wind').innerText = `Wind: ${currentWeather.wind.speed} m/s`;
+            document.getElementById('direction').innerText = `Wind Direction: ${currentWeather.wind.deg}°`;
+            document.getElementById('pressure').innerText = `Pressure: ${currentWeather.main.pressure} hPa`;
+            document.getElementById('feels-like').innerText = `Feels Like: ${Math.round(currentWeather.main.feels_like)}°C`;
+            document.getElementById('visibility').innerText = `Vision: ${currentWeather.visibility / 1000} km`;
+
+            // Update current weather icon based on weather condition
+            const iconCode = currentWeather.weather[0].icon;
+            const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+            document.getElementById('weather-icon').src = iconUrl;
+
+            // Update hourly forecasts
+            const hourlyForecasts = data.list.slice(0, 24);
+            const hourlyForecastsContainer = document.getElementById('hourly-forecasts');
+            hourlyForecastsContainer.innerHTML = '';
+            hourlyForecasts.forEach(forecast => {
+                const forecastTime = new Date(forecast.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const forecastTemperature = `${Math.round(forecast.main.temp)}°C`;
+                const forecastIconCode = forecast.weather[0].icon;
+                const forecastIconUrl = `http://openweathermap.org/img/w/${forecastIconCode}.png`;
+
+                const forecastElement = document.createElement('div');
+                forecastElement.classList.add('hourly-forecast');
+                forecastElement.innerHTML = `
+            <h5 class="hour">${forecastTime}</h5>
+            <img src="${forecastIconUrl}" alt="weather">
+            <h5 class="degree">${forecastTemperature}</h5>
+        `;
+                hourlyForecastsContainer.appendChild(forecastElement);
+            });
+
+            const dailyForecasts = {};
+            data.list.forEach(forecast => {
+                const forecastDate = new Date(forecast.dt * 1000);
+                const localDate = new Intl.DateTimeFormat('en-US', {
+                  timeZone: 'Africa/Cairo',
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+              }).format(forecastDate);
+              
+              const day = new Date(localDate).toLocaleDateString('en-US', { weekday: 'long' });
+          
+
+                if (!dailyForecasts[day]) {
+                    dailyForecasts[day] = [];
+                }
+
+                dailyForecasts[day].push(forecast);
+            });
+
+            const dailyForecastsContainer = document.getElementById('daily-forecasts');
+            dailyForecastsContainer.innerHTML = '';
+            Object.keys(dailyForecasts).forEach(day => {
+                const forecastsForDay = dailyForecasts[day];
+                const averageTemperature = forecastsForDay.reduce((total, forecast) => total + forecast.main.temp, 0) / forecastsForDay.length;
+                const forecastIconCode = forecastsForDay[0].weather[0].icon;
+                const forecastIconUrl = `http://openweathermap.org/img/w/${forecastIconCode}.png`;
+
+                const forecastElement = document.createElement('div');
+                forecastElement.classList.add('daily-forecast');
+                forecastElement.innerHTML = `
+            <h5 class="days">${day}</h5>
+            <img src="${forecastIconUrl}" alt="weather">
+            <h5 class="temperatures">${Math.round(averageTemperature)}°C</h5>
+        `;
+                dailyForecastsContainer.appendChild(forecastElement);
+            });
+        }
+
+        function fetchAirQuality(city) {
+            const airQualityValue = Math.floor(Math.random() * (500 - 1 + 1)) + 1;
+            const airQualityText = getAirQualityText(airQualityValue);
+
+            document.getElementById('air-quality-value').innerText = `${airQualityText} (${airQualityValue})`;
+
+            // Update progress bar
+            const progressBar = document.querySelector('.progress-bar-gradient');
+            progressBar.style.width = `${calculateProgressBarWidth(airQualityValue)}%`;
+            progressBar.classList.remove('progress-bar-gradient-bg-success', 'progress-bar-gradient-bg-warning', 'progress-bar-gradient-bg-orange', 'progress-bar-gradient-bg-danger'); // Remove previous classes
+            progressBar.className = 'progress-bar-gradient';
+        }
+        function getAirQualityText(value) {
+            if (value <= 50) {
+                return 'Good';
+            } else if (value <= 100) {
+                return 'Moderate';
+            } else if (value <= 150) {
+                return 'Unhealthy for Sensitive Groups';
+            } else if (value <= 200) {
+                return 'Unhealthy';
+            } else if (value <= 300) {
+                return 'Very Unhealthy';
+            } else {
+                return 'Hazardous';
+            }
+        }
+        // Function to calculate progress bar width based on air quality value
+        function calculateProgressBarWidth(value) {
+            return (value / 500) * 100;
+        }
+
+        // Function to determine progress bar color based on air quality value
+        function getProgressBarColor(value) {
+            if (value <= 50) {
+                return 'progress-bar bg-success'; // Green
+            } else if (value <= 100) {
+                return 'progress-bar bg-warning'; // Yellow
+            } else if (value <= 200) {
+                return 'progress-bar bg-orange'; // Orange
+            } else {
+                return 'progress-bar bg-danger'; // Red
+            }
+        }
+        function displayTomorrowTemperature(forecasts) {
+          const today = new Date();
+          const todayForecast = forecasts.find(forecast => new Date(forecast.dt * 1000).getDate() === today.getDate());
+          if (todayForecast) {
+              document.getElementById('today-humidity').innerText = `Humidity: ${Math.round(todayForecast.main.humidity)}%`;
+          } else {
+              document.getElementById('today-humidity').innerText = 'Not Available';
+          }
+      }
+      
+
+        window.addEventListener('load', fetchWeatherData);
+
+        
+    </script>
+    
+  
+    <script src="/js/all.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,66 @@
+
+    <%-include('../includes/head.ejs')%>
+</head>
+<style>
+    .shad{
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        width: 500px;
+        margin: auto;
+       
+      }
+       .pred {
+        font-size: 25px;
+        font-family: "Inter";
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(11, 10, 10, 0.1);
+      }
+    .content-box {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .btn-signup {
+        border: none;
+        outline: 0;
+        padding: 10px;
+        margin-top: 3rem;
+        font-size: 1rem;
+        color: white;
+        background-color: #40b736;
+        text-align: center;
+        cursor: pointer;
+        width: 15rem;
+        border-radius: 4px;
+    }
+    
+   .btn-signup:hover {
+        background-color: #1f9405;
+    }
+</style>
+<body class="d-flex flex-column min-vh-100">
+    <%-include('../includes/nav.ejs')%>
+    <div class="container-fluid detect flex-grow-1 d-flex flex-column justify-content-between" style="   padding: 100px 0 20px 0;">
+     
+        <div class="container-fluid flex-grow-1 d-flex justify-content-center align-items-center">
+            <div class="shad">
+                <div class="content-box bg-white">
+               <h5> Diseases Prediction Result</h5>
+                <p class="pred"><strong> <%= prediction %> </strong></p>
+                <br>
+                <a href="/detect" class="btn-signup"style="text-decoration:none;">Detect more..</a>
+            </div>
+            </div>
+        </div>
+    </div>
+    <%-include('../includes/footer.ejs')%>
+    <script src="js/all.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+
+    <%-include('../includes/head.ejs')%>
+    
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Global Styles */
+    
+    body {
+        font-family: Arial, sans-serif;
+    }
+        html, body {
+          
+            overflow: auto; /* Allow scrolling when content exceeds viewport */
+          }
+     
+   .crop{
+gap:50px
+}
+        .crop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+        }
+          
+    
+</style>
+<body>
+    <%-include('../includes/nav.ejs')%>
+    <div class="container-fluid crops " style=" padding: 50px 0 20px 0;">
+      
+       
+        <div class="content " >
+           
+        </div>
+        <div class="main">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
+                <% Plants.forEach(function(plant) { %>
+                    
+                <div class="col crop ">
+                    <a href="/plant/<%=plant.name%>" style="text-decoration:none; color:#123810;">
+                    <img src="<%=plant.image%>"  style="width: 450px; height: 325px;">
+                    <div class="crop-body">
+                        <div class="col">
+                            <h5 class="crop-title" style="height:100px;"><%=plant.name%></h5>
+                           
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+
+                        </div>
+                    </div>
+            
+                    <%-include('../includes/footer.ejs')%>
+      <script src="js/all.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

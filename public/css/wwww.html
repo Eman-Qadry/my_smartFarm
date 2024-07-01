@@ -1,0 +1,46 @@
+<body class="my-farm">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center text-center mt-5">
+            <div class="col-lg-6">
+                <div class="add-farm">
+                    <div class="crop-detail" id="cropDetail">
+                        <div class="detail-content">
+                            <div class="row justify-content-center align-items-center text-center">
+                                <div class="col-md-8 form-info">
+                                    <form action="" class="farm-form">
+                                        <div class="row p-4 mb-3 mt-5">
+                                            <a href="#" onclick="goBack()" style="text-decoration: none;"
+                                                class="col-1 goBack"><i class="fas fa-chevron-left"></i></a>
+                                            <h1 class="col-10">ADD New Crop</h1>
+                                        </div>
+                                        <div class="fields d-flex flex-column align-items-center">
+                                            <div class="col-md-10 input-field mb-3">
+                                                <input type="text" id="farm-name" name="farm-name" class="form-control"
+                                                    placeholder="Name">
+                                            </div>
+                                            <div class="col-md-10 input-field mb-3">
+                                                <input type="text" id="type" name="type" class="form-control"
+                                                    placeholder="Type">
+                                            </div>
+                                            <div class="col-md-10 input-field mb-3  d-flex date">
+                                                <input type="date" id="date" name="date" class="form-control" placeholder="Date">
+                                            </div>
+                                        </div>
+                                        <a href="#"><button type="submit" class="mt-4 btn-addfarm">Add</button></a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <script src="js/all.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
